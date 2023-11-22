@@ -49,7 +49,8 @@ for singleFile in list:
             for i in fdsSampleSet:
                 o.write(i.to_bytes(1, 'big'))
             looper = 0
-            while looper < 48:
+            o.write(bytes.fromhex("04 07 07 07 07 07 07 00 00 00 01 01 01 01 01 01 04 01 01 01 01 01 01 00 00 00 07 07 07 07 07 07"))
+            while looper < 16:
                 o.write(bytes.fromhex("00"))
                 looper += 1
             looper = 0
