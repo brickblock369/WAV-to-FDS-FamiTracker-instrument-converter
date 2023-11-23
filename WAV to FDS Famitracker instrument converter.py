@@ -44,8 +44,12 @@ for singleFile in list:
                 fdsSampleSet.append(SixbitSampleSet[int(looper)])
                 looper += Sample64Divider
             o.write(bytes("FTI2.4", 'ASCII'))
-            FTIbytes = bytes.fromhex("0400000000")
+            FTIbytes = bytes.fromhex("04")
             o.write(FTIbytes)
+            length = len(singleFile)
+            o.write(length.to_bytes(1, 'big'))
+            o.write(bytes.fromhex("000000"))
+            o.write(bytes(singleFile, 'utf-8')) #write the filename into FDS instrument name
             for i in fdsSampleSet:
                 o.write(i.to_bytes(1, 'big'))
             looper = 0
